@@ -35,8 +35,8 @@
         "type": "tak",
         "z": "c63cfcd7102df296",
         "name": "TAK",
-        "x": 610,
-        "y": 320,
+        "x": 630,
+        "y": 380,
         "wires": [
             [
                 "a119c6cddcca480a",
@@ -62,7 +62,7 @@
         "type": "tak",
         "z": "c63cfcd7102df296",
         "name": "TAK",
-        "x": 2390,
+        "x": 2270,
         "y": 380,
         "wires": [
             [
@@ -86,8 +86,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2550,
-        "y": 240,
+        "x": 2590,
+        "y": 260,
         "wires": []
     },
     {
@@ -102,7 +102,7 @@
         "outport": "",
         "base64": false,
         "multicast": "multi",
-        "x": 2730,
+        "x": 2610,
         "y": 340,
         "wires": []
     },
@@ -117,7 +117,7 @@
         "base64": false,
         "end": false,
         "tls": "1c52b35895c06e7e",
-        "x": 2750,
+        "x": 2630,
         "y": 400,
         "wires": []
     },
@@ -137,7 +137,7 @@
         "z": "c63cfcd7102df296",
         "name": "configure TCP (TAKServer)",
         "info": "if using SSL/TLS ensure you upload your certificates, key and input your passphrase.\nCertificates (.pem) and key (.key) can be found in your TAKServers directory where it stores all TAK client certificates.\nDefualt SSL/TLS port is 8089.\n",
-        "x": 2750,
+        "x": 2630,
         "y": 460,
         "wires": []
     },
@@ -196,7 +196,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 990,
+        "x": 870,
         "y": 420,
         "wires": [
             [
@@ -224,7 +224,7 @@
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 1230,
+        "x": 1110,
         "y": 420,
         "wires": [
             [
@@ -243,7 +243,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1050,
+        "x": 930,
         "y": 460,
         "wires": [
             [
@@ -261,7 +261,7 @@
         "tag": "link",
         "ret": "attr",
         "as": "single",
-        "x": 930,
+        "x": 810,
         "y": 460,
         "wires": [
             [
@@ -280,7 +280,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1350,
+        "x": 1230,
         "y": 420,
         "wires": [
             [
@@ -306,7 +306,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1170,
+        "x": 1050,
         "y": 460,
         "wires": [
             [
@@ -325,7 +325,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1010,
+        "x": 890,
         "y": 380,
         "wires": [
             [
@@ -350,7 +350,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1500,
+        "x": 1380,
         "y": 340,
         "wires": [
             [
@@ -362,15 +362,16 @@
         "id": "9e6666c1bb23c2bf",
         "type": "debug",
         "z": "c63cfcd7102df296",
-        "name": "debug 43",
+        "name": "debug join",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1900,
+        "x": 1810,
         "y": 240,
         "wires": []
     },
@@ -394,7 +395,7 @@
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 1790,
+        "x": 1670,
         "y": 380,
         "wires": [
             [
@@ -420,7 +421,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1650,
+        "x": 1530,
         "y": 340,
         "wires": [
             [
@@ -432,8 +433,8 @@
         "id": "548a0dbf6e04b153",
         "type": "debug",
         "z": "c63cfcd7102df296",
-        "name": "debug 44",
-        "active": true,
+        "name": "debug filter",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -441,7 +442,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2080,
+        "x": 2010,
         "y": 240,
         "wires": []
     },
@@ -456,7 +457,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1950,
+        "x": 1870,
         "y": 380,
         "wires": [
             [
@@ -476,7 +477,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2120,
+        "x": 2080,
         "y": 380,
         "wires": [
             [
@@ -489,15 +490,16 @@
         "id": "7d22a757a5b8ea00",
         "type": "debug",
         "z": "c63cfcd7102df296",
-        "name": "debug 45",
+        "name": "debug json",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2300,
+        "x": 2250,
         "y": 240,
         "wires": []
     },
