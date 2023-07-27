@@ -1,2 +1,8 @@
 # repeaterTakFlow
-node red flow to forward locations of RF repeaters from specified area in TAK
+Node-Red Flow to forward Repeater coverage from RepeaterBook database to TAK via multicast or TAKServer. (used in conjunction with Ampledatas node-red-contrib-tak).
+
+![nodered](/repeaterTakFlow.png?raw=true "nodered")
+
+![atak](/atak.png?raw=true "atak")
+
+![itak](/itak.png?raw=true "itak")
