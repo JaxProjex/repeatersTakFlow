@@ -5,4 +5,4 @@ Node-Red Flow to forward Repeater coverage from RepeaterBook database to TAK via
 
 ![atak](/atak.png?raw=true "atak")
 
-![itak](/itak.png?raw=true "itak")
+![itak](/itak1.png?raw=true "itak")
