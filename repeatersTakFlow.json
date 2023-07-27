@@ -1,0 +1,518 @@
+[
+    {
+        "id": "c63cfcd7102df296",
+        "type": "tab",
+        "label": "repeatersTakFlow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "38b15e102e66d490",
+        "type": "tcp in",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "server": "client",
+        "host": "10.237.104.20",
+        "port": "8089",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "1c52b35895c06e7e",
+        "x": 320,
+        "y": 320,
+        "wires": [
+            [
+                "82c13821a6bf4f05"
+            ]
+        ]
+    },
+    {
+        "id": "82c13821a6bf4f05",
+        "type": "tak",
+        "z": "c63cfcd7102df296",
+        "name": "TAK",
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "a119c6cddcca480a",
+                "c242cde66fca08a1",
+                "84fd5b608675f498"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a95cceed7b73b332",
+        "type": "comment",
+        "z": "c63cfcd7102df296",
+        "name": "README",
+        "info": "",
+        "x": 620,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fcb40e151392e7b6",
+        "type": "tak",
+        "z": "c63cfcd7102df296",
+        "name": "TAK",
+        "x": 2390,
+        "y": 380,
+        "wires": [
+            [
+                "97987c5c9f4ddc57",
+                "b046679273a22497"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "97987c5c9f4ddc57",
+        "type": "debug",
+        "z": "c63cfcd7102df296",
+        "name": "debug cot",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2550,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5c4d57a3608dff03",
+        "type": "udp out",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "addr": "239.2.3.1",
+        "iface": "",
+        "port": "6969",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "multi",
+        "x": 2730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b046679273a22497",
+        "type": "tcp out",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "host": "10.237.104.20",
+        "port": "8089",
+        "beserver": "client",
+        "base64": false,
+        "end": false,
+        "tls": "1c52b35895c06e7e",
+        "x": 2750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ac4df34144f8a51a",
+        "type": "comment",
+        "z": "c63cfcd7102df296",
+        "name": "configure TCP (TAKServer)",
+        "info": "if using SSL/TLS ensure you upload your certificates, key and input your passphrase.\nCertificates (.pem) and key (.key) can be found in your TAKServers directory where it stores all TAK client certificates.\nDefualt SSL/TLS port is 8089.\n",
+        "x": 330,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a74fdbb5ae92cb27",
+        "type": "comment",
+        "z": "c63cfcd7102df296",
+        "name": "configure TCP (TAKServer)",
+        "info": "if using SSL/TLS ensure you upload your certificates, key and input your passphrase.\nCertificates (.pem) and key (.key) can be found in your TAKServers directory where it stores all TAK client certificates.\nDefualt SSL/TLS port is 8089.\n",
+        "x": 2750,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b1cf08ef5bd07163",
+        "type": "udp in",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "iface": "",
+        "port": "6969",
+        "ipv": "udp4",
+        "multicast": "true",
+        "group": "239.2.3.1",
+        "datatype": "utf8",
+        "x": 330,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ac29a2424186a34",
+        "type": "udp in",
+        "z": "c63cfcd7102df296",
+        "name": "udp 239.2.3.1:6969 (ZT)",
+        "iface": "",
+        "port": "6969",
+        "ipv": "udp4",
+        "multicast": "true",
+        "group": "239.2.3.1",
+        "datatype": "buffer",
+        "x": 320,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "824190a75cbb50dd",
+        "type": "comment",
+        "z": "c63cfcd7102df296",
+        "name": "if using ZeroTier over UDP connect the \"udp (ZT)\" ",
+        "info": "",
+        "x": 350,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c242cde66fca08a1",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "filter data repeaters (ZT)",
+        "func": "var callsign = msg.payload.cotEvent.detail.contact.callsign;\nif (callsign === \"repeaters\" || callsign === \"Repeaters\" || callsign === \"REPEATERS\" || callsign === \"repeater\" || callsign === \"Repeater\" || callsign === \"REPEATER\") {\n\n    msg.part = 1;\n    msg.payload = {\n        \"callsign\": callsign\n    };\n    node.send(msg);\n} else {\n    return null;\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 420,
+        "wires": [
+            [
+                "6764e732435f9c16"
+            ]
+        ]
+    },
+    {
+        "id": "6764e732435f9c16",
+        "type": "join",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1230,
+        "y": 420,
+        "wires": [
+            [
+                "8b2986f37721ef89"
+            ]
+        ]
+    },
+    {
+        "id": "e7d0d46f69cac030",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "f",
+        "func": "msg.part = 2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 460,
+        "wires": [
+            [
+                "d6183a8aac643747"
+            ]
+        ]
+    },
+    {
+        "id": "84fd5b608675f498",
+        "type": "html",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "property": "payload.cotEvent.detail.xmlDetail",
+        "outproperty": "payload",
+        "tag": "link",
+        "ret": "attr",
+        "as": "single",
+        "x": 930,
+        "y": 460,
+        "wires": [
+            [
+                "e7d0d46f69cac030"
+            ]
+        ]
+    },
+    {
+        "id": "8b2986f37721ef89",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "f",
+        "func": "var callsign = msg.payload[0].callsign;\nvar coord1 = msg.payload[1][0].point.split(\",\");\nvar coord2 = msg.payload[1][1].point.split(\",\");\nvar coord3 = msg.payload[1][2].point.split(\",\");\nvar coord4 = msg.payload[1][3].point.split(\",\");\nvar lat = [coord1[0], coord2[0], coord3[0], coord4[0]];\nvar lon = [coord1[1], coord2[1], coord3[1], coord4[1]];\n    lat.sort(function(a,b){\n        return a - b;\n    });\n    lon.sort(function (a, b) {\n        return a - b;\n    });\n\n\n    msg.payload = {\n        \"lat1\": parseFloat(lat[0]),\n        \"lat2\": parseFloat(lat[3]),\n        \"lon1\": parseFloat(lon[0]),\n        \"lon2\": parseFloat(lon[3]),\n};\nnode.send(msg);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 420,
+        "wires": [
+            [
+                "93717f872479880a",
+                "d34163c6f7a77c71"
+            ]
+        ]
+    },
+    {
+        "id": "d6183a8aac643747",
+        "type": "delay",
+        "z": "c63cfcd7102df296",
+        "name": "d",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1170,
+        "y": 460,
+        "wires": [
+            [
+                "6764e732435f9c16"
+            ]
+        ]
+    },
+    {
+        "id": "a119c6cddcca480a",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "filter data repeaters",
+        "func": "var callsign = msg.payload.event.detail.contact._attributes.callsign;\nif (callsign === \"repeaters\" || callsign === \"Repeaters\" || callsign === \"REPEATERS\" || callsign === \"repeater\" || callsign === \"Repeater\" || callsign === \"REPEATER\") {\n    var coord1 = msg.payload.event.detail.link[0]._attributes.point.split(\",\");\n    var coord2 = msg.payload.event.detail.link[1]._attributes.point.split(\",\");\n    var coord3 = msg.payload.event.detail.link[2]._attributes.point.split(\",\");\n    var coord4 = msg.payload.event.detail.link[3]._attributes.point.split(\",\");\n    var lat = [coord1[0], coord2[0], coord3[0], coord4[0]];\n    var lon = [coord1[1], coord2[1], coord3[1], coord4[1]];\n    lat.sort(function(a,b){\n        return a - b;\n    });\n    lon.sort(function (a, b) {\n        return a - b;\n    });\n    var lat1 = parseFloat(lat[0])\n    var lat2 = parseFloat(lat[3])\n    var lon1 = parseFloat(lon[0])\n    var lon2 = parseFloat(lon[3])\n\n    msg.payload = {\n        \"lat1\": parseFloat(lat[0]),\n        \"lat2\": parseFloat(lat[3]),\n        \"lon1\": parseFloat(lon[0]),\n        \"lon2\": parseFloat(lon[3]),\n    };\n    node.send(msg);\n} else {\n    return null;\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 380,
+        "wires": [
+            [
+                "93717f872479880a",
+                "d34163c6f7a77c71"
+            ]
+        ]
+    },
+    {
+        "id": "93717f872479880a",
+        "type": "http request",
+        "z": "c63cfcd7102df296",
+        "name": "http req",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://www.repeaterbook.com/api/export.php?country=United%20States",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1500,
+        "y": 340,
+        "wires": [
+            [
+                "6113c304fcf1031c"
+            ]
+        ]
+    },
+    {
+        "id": "9e6666c1bb23c2bf",
+        "type": "debug",
+        "z": "c63cfcd7102df296",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1900,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d34163c6f7a77c71",
+        "type": "join",
+        "z": "c63cfcd7102df296",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1790,
+        "y": 380,
+        "wires": [
+            [
+                "9e6666c1bb23c2bf",
+                "8f9f7596e9925f83"
+            ]
+        ]
+    },
+    {
+        "id": "6113c304fcf1031c",
+        "type": "delay",
+        "z": "c63cfcd7102df296",
+        "name": "delay",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1650,
+        "y": 340,
+        "wires": [
+            [
+                "d34163c6f7a77c71"
+            ]
+        ]
+    },
+    {
+        "id": "548a0dbf6e04b153",
+        "type": "debug",
+        "z": "c63cfcd7102df296",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2080,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8f9f7596e9925f83",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "f1",
+        "func": "var latmin = msg.payload[0].lat1.toFixed(8);\nvar latmax = msg.payload[0].lat2.toFixed(8);\nvar lonmin = msg.payload[0].lon1.toFixed(8);\nvar lonmax = msg.payload[0].lon2.toFixed(8);\nvar length = msg.payload[1].results.length;\nvar newMsg;\n\nfor (var i = 0; i < length; i++) {\n    var lat = parseFloat(msg.payload[1].results[i].Lat).toFixed(8);\n    var lon = parseFloat(msg.payload[1].results[i].Long).toFixed(8);\n    var info = msg.payload[1].results[i];\n\n    newMsg = { payload: [lat, lon, info, latmin, lonmin, latmax, lonmax] }\n    node.send(newMsg);\n\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1950,
+        "y": 380,
+        "wires": [
+            [
+                "548a0dbf6e04b153",
+                "cb8f66ee461d0f6e"
+            ]
+        ]
+    },
+    {
+        "id": "cb8f66ee461d0f6e",
+        "type": "function",
+        "z": "c63cfcd7102df296",
+        "name": "repeaters (sites)",
+        "func": "var newMsg;\nconst short = 10000;\nconst uno = 60 * 1000;\nconst cinco = 5 * 60 * 1000;\nconst diez = 2 * cinco;\nconst stale = new Date(Date.now() + uno).toISOString();\n\nvar lat = msg.payload[0];\nvar lon = parseFloat(msg.payload[1]);\nvar lat1 = msg.payload[3];\nvar lat2 = msg.payload[5];\nvar lon1 = parseFloat(msg.payload[4]);\nvar lon2 = parseFloat(msg.payload[6]);\n\nvar lastUpd = msg.payload[2][\"Last Update\"];\nvar callsign = msg.payload[2].Callsign\nvar stateId = msg.payload[2][\"State ID\"];\nvar rptrId = msg.payload[2][\"Rptr ID\"];\nvar freq = msg.payload[2].Frequency;\nvar inputFreq = msg.payload[2][\"Input Freq\"];\nvar opStatus = msg.payload[2][\"Operational Status\"];\nvar lastUpd = msg.payload[2][\"Last Update\"];\nvar use = msg.payload[2].Use;\n\nvar data = \"Last Update: \" + lastUpd + \"\\n Input Freq:\" + inputFreq + \"\\n Freq: \" + freq + \"\\n Repeater ID: \" + rptrId + \"\\n State ID: \" + stateId + \"\\n Use: \" + use + \"\\n Operational Status: \" + opStatus;\n\nvar pl = msg.payload[2].PL;\nif (pl != \"No\" && pl != \"\"){\n    data += \"\\n PL: \" + pl;\n};\n\nvar tsq = msg.payload[2].TSQ;\nif (tsq != \"\" && tsq != \"No\") {\n    data += \"\\n TSQ: \" + tsq;\n};\n\nvar ares = msg.payload[2].ARES;\nif (ares != \"\" && ares != \"No\") {\n    data += \"\\n ARES: \" + ares;\n};\n\nvar races = msg.payload[2].RACES;\nif (races != \"\" && races != \"No\") {\n    data += \"\\n RACES: \" + races;\n};\n\nvar skywarn = msg.payload[2].SKYWARN;\nif (skywarn != \"\" && skywarn != \"No\") {\n    data += \"\\n SKYWARN: \" + skywarn;\n};\n\nvar canwarn = msg.payload[2].CANWARN;\nif (canwarn !== \"\" && canwarn !== \"No\") {\n    data += \"\\n CANWARN: \" + canwarn;\n};\n\nvar dmr = msg.payload[2].DMR;\nif (dmr != \"\" && dmr != \"No\") {\n    data += \"\\n DMR: \" + dmr;\n};\n\nvar dmrColor = msg.payload[2][\"DMR Color Code\"];\nif (dmrColor != \"\" && dmrColor != \"No\") {\n    data += \"\\n DMR Color: \" + dmrColor;\n};\n\nvar dmrId = msg.payload[2][\"DMR ID\"];\nif (dmrId != \"\" && dmrId != \"No\") {\n    data += \"\\n DMR ID: \" + dmrId;\n};\n\nvar allStar = msg.payload[2][\"AllStar Node\"];\nif (allStar != \"\" && allStar != \"No\") {\n    data += \"\\n All Star Node: \" + allStar;\n};\n\nvar echoLink = msg.payload[2][\"EchoLink Node\"];\nif (echoLink != \"\" && echoLink != \"No\") {\n    data += \"\\n Echo Link Node: \" + echoLink;\n};\n\nvar irlpNode = msg.payload[2][\"IRLP Node\"];\nif (irlpNode != \"\" && irlpNode != \"No\") {\n    data += \"\\n IRLP Node: \" + irlpNode;\n};\n\nvar wireNode = msg.payload[2][\"Wires Node\"];\nif (wireNode != \"\" && wireNode != \"No\") {\n    data += \"\\n Wires Node: \" + wireNode;\n};\n\nvar fmAn = msg.payload[2][\"FM Analog\"];\nif (fmAn != \"\" && fmAn != \"No\") {\n    data += \"\\n FM Analog: \" + fmAn;\n};\n\nvar dstar = msg.payload[2][\"D-Star\"];\nif (dstar != \"\" && dstar != \"No\") {\n    data += \"\\n D-Star: \" + dstar;\n};\n\nvar nxdn = msg.payload[2].NXDN;\nif (nxdn != \"\" && nxdn != \"No\") {\n    data += \"\\n NXDN: \" + nxdn;\n};\n\nvar apco = msg.payload[2][\"APCO P-25\"];\nif (apco != \"\" && apco != \"No\") {\n    data += \"\\n APCO P-25: \" + apco;\n};\n\nvar p25 = msg.payload[2][\"P-25 NAC\"];\nif (p25 != \"\" && p25 != \"No\") {\n    data += \"\\n P-25 NAC: \" + p25;\n};\n\nvar m17 = msg.payload[2].M17;\nif (m17 != \"\" && m17 != \"No\") {\n    data += \"\\n M17: \" + m17;\n};\n\nvar tetra = msg.payload[2].Tetra;\nif (tetra != \"\" && tetra != \"No\") {\n    data += \"\\n Tetra: \" + tetra;\n};\n\nvar tetraMnc = msg.payload[2][\"Tetra MNC\"];\nif (tetraMnc != \"\" && tetraMnc != \"No\") {\n    data += \"\\n Tetra MNC: \" + tetraMnc;\n};\n\nvar tetraMcc = msg.payload[2][\"Tetra MCC\"];\nif (tetraMcc != \"\" && tetraMcc != \"No\") {\n    data += \"\\n Tetra MCC: \" + tetraMcc;\n};\n\nvar sysFus = msg.payload[2][\"System Fusion\"];\nif (sysFus != \"\" && sysFus != \"No\") {\n    data += \"\\n System Fusion: \" + sysFus;\n};\n\nvar ysfUl = msg.payload[2][\"YSF DG ID Uplink\"];\nif (ysfUl != \"\" && ysfUl != \"No\") {\n    data += \"\\n YSF DG ID Uplink: \" + ysfUl;\n};\n\nvar ysfDl = msg.payload[2][\"YSF DG IS Downlink\"];\nif (ysfDl != \"\" && ysfDl != \"No\") {\n    data += \"\\n YSF DG IS Downlink: \" + ysfDl;\n};\n\nvar ysfDsc = msg.payload[2][\"YSF DSC\"];\nif (ysfDsc != \"\" && ysfDsc != \"No\") {\n    data += \"\\n YSF DSC: \" + ysfDsc;\n};\n\nvar notes = msg.payload[2].Notes;\nif (notes != \"\" && notes != \"No\") {\n    data += \"\\n Notes: \" + notes;\n};\n\nfreq = parseFloat(freq);\nfreq = freq.toFixed(3);\nvar name = callsign + \": \" + freq + \"MHz\";\nvar uuid = name;\nvar color = \"-65281\" //purple\n\nif (lat > lat1 && lat < lat2 && lon > lon1 && lon < lon2) {\n    \n    newMsg = {\n        \"payload\": {\n        \"event\": {\n            \"_attributes\": {\n                \"version\": \"2.0\",\n                \"uid\": \"\"+ uuid +\"\",\n                \"type\": \"b-m-p-s-m\",\n                \"how\": \"h-g-i-g-o\",\n                \"time\": new Date(Date.now()).toISOString(),\n                \"start\": new Date(Date.now()).toISOString(),\n                \"stale\": stale,\n            },\n            \"point\": {\n                \"_attributes\": {\n                    \"lat\": \"\"+ lat +\"\",\n                    \"lon\": \"\"+ lon + \"\",\n                    \"hae\": \"0.0\",\n                    \"ce\": \"9999999.0\",\n                    \"le\": \"9999999.0\"\n                }\n            },\n            \"detail\": {\n                \"usericon\": {\n                    \"_attributes\": {\n                        \"iconsetpath\": \"COT_MAPPING_SPOTMAP/b-m-p-s-m/\"+ color +\"\",\n                    },\n                },\n                \"remarks\": {\n                    \"_text\": data,\n                },\n                \"contact\": {\n                    \"_attributes\": {\n                    \"callsign\": \"\"+ name +\"\",\n                    }\n                },\n                \"color\": {\n                    \"_attributes\": {\n                    \"argb\": \"\"+ color +\"\",\n                    },\n                },\n            }\n        }\n    }\n    }\n    node.send(newMsg);\n} else {\n    return null;\n};\n//return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2120,
+        "y": 380,
+        "wires": [
+            [
+                "7d22a757a5b8ea00",
+                "fcb40e151392e7b6"
+            ]
+        ]
+    },
+    {
+        "id": "7d22a757a5b8ea00",
+        "type": "debug",
+        "z": "c63cfcd7102df296",
+        "name": "debug 45",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1c52b35895c06e7e",
+        "type": "tls-config",
+        "name": "node-red to takserver",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "node-red.pem",
+        "keyname": "node-red.key",
+        "caname": "ca.pem",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
